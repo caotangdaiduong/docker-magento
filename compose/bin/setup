@@ -13,6 +13,8 @@ source env/elasticsearch.env
 source env/magento.env
 # shellcheck source=../env/rabbitmq.env
 source env/rabbitmq.env
+# shellcheck source=../env/redis.env
+source env/redis.env
 
 DOMAIN=${1:-magento.test}
 
@@ -68,15 +70,15 @@ bin/clinotty bin/magento setup:install \
   --amqp-password="$RABBITMQ_DEFAULT_PASS" \
   --amqp-virtualhost="$RABBITMQ_DEFAULT_VHOST" \
   --cache-backend=redis \
-  --cache-backend-redis-server=redis \
-  --cache-backend-redis-db=0 \
+  --cache-backend-redis-server=$REDIS_HOST \
+  --cache-backend-redis-db=$REDIS_DB_CACHE_BACKEND \
   --page-cache=redis \
-  --page-cache-redis-server=redis \
-  --page-cache-redis-db=1 \
+  --page-cache-redis-server=$REDIS_HOST \
+  --page-cache-redis-db=$REDIS_DB_CACHE_FRONTEND \
   --session-save=redis \
-  --session-save-redis-host=redis \
+  --session-save-redis-host=$REDIS_HOST \
   --session-save-redis-log-level=4 \
-  --session-save-redis-db=2 \
+  --session-save-redis-db=$REDIS_DB_SESSION \
   --search-engine=elasticsearch7 \
   --elasticsearch-host=$ES_HOST \
   --elasticsearch-port=$ES_PORT \

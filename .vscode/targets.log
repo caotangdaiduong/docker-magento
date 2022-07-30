@@ -1,4 +1,6 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
+make: *** No rule to make target 'all'.  Stop.
+
 # GNU Make 4.3
 # Built for x86_64-pc-linux-gnu
 # Copyright (C) 1988-2020 Free Software Foundation, Inc.
@@ -6,7 +8,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sat Jul 30 15:00:27 2022
+# Make data base, printed on Sat Jul 30 15:59:58 2022
 
 # Variables
 
@@ -19,7 +21,7 @@ GNOME_SHELL_SESSION_MODE = ubuntu
 # environment
 SSH_AGENT_LAUNCHER = gnome-keyring
 # environment
-STARSHIP_SESSION_KEY = 9176271489711228
+STARSHIP_SESSION_KEY = 3084131998240616
 # environment
 GJS_DEBUG_OUTPUT = stderr
 # environment
@@ -55,7 +57,7 @@ VSCODE_CODE_CACHE_PATH = /home/thepd/.config/Code/CachedData/3b889b090b5ad5793f5
 # environment
 LANG = C
 # environment
-XAUTHORITY = /run/user/1000/.mutter-Xwaylandauth.IV26P1
+XAUTHORITY = /run/user/1000/.mutter-Xwaylandauth.AD1HQ1
 # default
 .LOADED := 
 # default
@@ -89,13 +91,13 @@ MAKEFILE_LIST :=
 # automatic
 @F = $(notdir $@)
 # environment
-VSCODE_PID = 11952
+VSCODE_PID = 199637
 # environment
 XDG_SESSION_TYPE = wayland
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # environment
-SESSION_MANAGER = local/thepd-desktop:@/tmp/.ICE-unix/1975,unix/thepd-desktop:/tmp/.ICE-unix/1975
+SESSION_MANAGER = local/thepd-desktop:@/tmp/.ICE-unix/97734,unix/thepd-desktop:/tmp/.ICE-unix/97734
 # automatic
 *F = $(notdir $*)
 # environment
@@ -137,7 +139,7 @@ LC_MONETARY = vi_VN
 # environment
 LC_TIME = vi_VN
 # environment
-INVOCATION_ID = c274866a6d3747d08c80cc1581719af9
+INVOCATION_ID = e8a450e4ef0846169b2788040ad06176
 # environment
 USERNAME = thepd
 # environment
@@ -167,7 +169,7 @@ GIO_LAUNCHED_DESKTOP_FILE = /usr/share/applications/code.desktop
 # makefile
 .DEFAULT_GOAL := 
 # environment
-SYSTEMD_EXEC_PID = 2025
+SYSTEMD_EXEC_PID = 97773
 # environment
 DISPLAY = :0
 # environment
@@ -183,7 +185,7 @@ LC_MEASUREMENT = vi_VN
 # environment
 STARSHIP_SHELL = bash
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 11952
+GIO_LAUNCHED_DESKTOP_FILE_PID = 199637
 # environment
 _ = /usr/share/code/code
 # environment
@@ -191,7 +193,7 @@ LC_PAPER = vi_VN
 # environment
 XDG_RUNTIME_DIR = /run/user/1000
 # environment
-JOURNAL_STREAM = 8:36250
+JOURNAL_STREAM = 8:657685
 # environment
 XDG_SESSION_CLASS = user
 # environment
@@ -229,9 +231,9 @@ LC_IDENTIFICATION = vi_VN
 
 # Directories
 
-# . (device 66309, inode 9181676): 13 files, no impossibilities.
+# . (device 66309, inode 9181676): 14 files, no impossibilities.
 
-# 13 files, no impossibilities in 1 directories.
+# 14 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -281,15 +283,13 @@ GNUmakefile:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 21 / storage = 184 B / avg = 8 B
-# current buf: size = 8162 B / used = 184 B / count = 21 / avg = 8 B
+# strcache buffers: 1 (0) / strings = 22 / storage = 195 B / avg = 8 B
+# current buf: size = 8162 B / used = 195 B / count = 22 / avg = 8 B
 
-# strcache performance: lookups = 24 / hit rate = 12%
+# strcache performance: lookups = 25 / hit rate = 12%
 # hash-table stats:
  
-make: *** No rule to make target 'all'.  Stop.
-
-# Load=21/8192=0%, Rehash=0, Collisions=0/24=0%
-# Finished Make data base on Sat Jul 30 15:00:27 2022
+# Load=22/8192=0%, Rehash=0, Collisions=0/25=0%
+# Finished Make data base on Sat Jul 30 15:59:58 2022
 
  
