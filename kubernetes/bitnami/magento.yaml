@@ -1,0 +1,73 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: magento-app
+  namespace: magento2
+  labels:
+    app: magento
+spec:
+  ports:
+    - port: 8443
+  selector:
+    app: magento
+    tier: app
+  clusterIP: None
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: magento-app
+  namespace: magento2
+  labels:
+    app: magento
+    tier: app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: magento-app
+      tier: app
+  strategy:
+    rollingUpdate:
+      maxSurge: 50%
+      maxUnavailable: 30%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: magento-app
+        tier: app
+    spec:
+      containers:
+      - image: docker.io/bitnami/magento:2
+        imagePullPolicy: IfNotPresent
+        name: magento-app
+        resources:
+          limits:
+            cpu: 500m
+            memory: 1Gi
+          requests:
+            cpu: 250m
+            memory: 500Mi
+        env:
+          - name: MAGENTO_HOST
+            value: localhost
+          - name: MAGENTO_DATABASE_HOST
+            value: magento-mariadb
+          - name: MAGENTO_DATABASE_PORT_NUMBER
+            value: "3306"
+          - name: MAGENTO_DATABASE_USER
+            value: bn_magento
+          - name: MAGENTO_DATABASE_NAME
+            value: bitnami_magento
+          - name: MAGENTO_DATABASE_PASSWORD
+            value: mypassword
+          # - name: ALLOW_EMPTY_PASSWORD
+          #   value: "yes"
+          - name: ELASTICSEARCH_HOST
+            value: magento-elasticsearch
+          - name: ELASTICSEARCH_PORT_NUMBER
+            value: "9200"
+        ports:
+        - containerPort: 8443
+          name: https

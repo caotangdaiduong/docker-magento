@@ -1,0 +1,48 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: magento-elasticsearch
+  namespace: magento2
+  labels:
+    app: magento
+spec:
+  ports:
+    - port: 9200
+  selector:
+    app: magento
+    tier: elasticsearch
+  clusterIP: None
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: magento-elasticsearch
+  namespace: magento2
+  labels:
+    app: magento
+spec:
+  selector:
+    matchLabels:
+      app: magento
+      tier: elasticsearch
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: magento
+        tier: elasticsearch
+    spec:
+      containers:
+      - image: docker.io/bitnami/elasticsearch:7
+        name: elasticsearch
+        resources:
+          limits:
+            cpu: 500m
+            memory: 1Gi
+          requests:
+            cpu: 250m
+            memory: 500Mi
+        ports:
+        - containerPort: 9200
+          name: elasticsearch

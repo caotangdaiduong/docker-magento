@@ -1,0 +1,59 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: magento-mariadb
+  namespace: magento2
+  labels:
+    app: magento
+spec:
+  ports:
+    - port: 3306
+  selector:
+    app: magento
+    tier: mariadb
+  clusterIP: None
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: magento-mariadb
+  namespace: magento2
+  labels:
+    app: magento
+spec:
+  selector:
+    matchLabels:
+      app: magento
+      tier: mariadb
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: magento
+        tier: mariadb
+    spec:
+      containers:
+      - image: docker.io/bitnami/mariadb:10.4
+        name: mariadb
+        resources:
+          limits:
+            cpu: 500m
+            memory: 1Gi
+          requests:
+            cpu: 250m
+            memory: 500Mi
+        env:
+        - name: ALLOW_EMPTY_PASSWORD
+          value: "yes"
+        - name: MARIADB_USER
+          value: bn_magento
+        - name: MARIADB_PASSWORD
+          value: mypassword
+        - name: MARIADB_ROOT_PASSWORD
+          value: mypassword
+        - name: MARIADB_DATABASE
+          value: bitnami_magento
+        ports:
+        - containerPort: 3306
+          name: mariadb
