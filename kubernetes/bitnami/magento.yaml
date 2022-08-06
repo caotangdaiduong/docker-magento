@@ -13,6 +13,34 @@ spec:
     tier: app
   clusterIP: None
 ---
+# apiVersion: v1
+# kind: PersistentVolume
+# metadata:
+#   name: magento-app
+#   namespace: magento2
+# spec:
+#   capacity:
+#     storage: 5Gi
+#   volumeMode: Filesystem
+#   accessModes:
+#     - ReadWriteMany
+#   persistentVolumeReclaimPolicy: Recycle
+#   nfs:
+#     path: /var/nfs/general/magento/app
+#     server: 65.21.238.216
+# ---
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: magento-app
+#   namespace: magento2
+# spec:
+#   accessModes:
+#   - ReadWriteMany
+#   resources:
+#     requests:
+#       storage: 5Gi
+# ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -71,3 +99,12 @@ spec:
         ports:
         - containerPort: 8443
           name: https
+        - containerPort: 8080
+          name: http
+      #   volumeMounts:
+      #   - name: app-data
+      #     mountPath: /bitnami/magento
+      # volumes:
+      # - name: app-data
+      #   persistentVolumeClaim:
+      #     claimName: magento-app

@@ -13,6 +13,34 @@ spec:
     tier: mariadb
   clusterIP: None
 ---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: magento-mariadb
+  namespace: magento2
+spec:
+  capacity:
+    storage: 5Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Recycle
+  nfs:
+    path: /var/nfs/general/magento/mariadb
+    server: 65.21.238.216
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: magento-mariadb
+  namespace: magento2
+spec:
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: 5Gi
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -57,3 +85,10 @@ spec:
         ports:
         - containerPort: 3306
           name: mariadb
+        volumeMounts:
+        - name: mariadb-data
+          mountPath: /bitnami/mariadb
+      volumes:
+      - name: mariadb-data
+        persistentVolumeClaim:
+          claimName: magento-mariadb
