@@ -144,7 +144,29 @@ RUN echo "Adding Magento modules to Composer allow-plugins directive..." && \
     composer config --no-plugins allow-plugins.magento/magento-composer-installer true && \
     composer config --no-plugins allow-plugins.magento/inventory-composer-installer true && \
     composer config --no-plugins allow-plugins.laminas/laminas-dependency-plugin true && \
-    ping 8.8.8.8 -t
+    bin/magento setup:install \
+  --db-host=db \
+  --db-name=magento \
+  --db-user=magento \
+  --db-password=magento \
+  --base-url=https://localhost/ \
+  --base-url-secure=https://localhost/ \
+  --backend-frontname=admin \
+  --admin-firstname=aaa \
+  --admin-lastname=bbb \
+  --admin-email=john.smith@gmail.com \
+  --admin-user=admin \
+  --admin-password=admin123 \
+  --language=en_US \
+  --currency=USD \
+  --timezone=America/New_York && \
+      bin/magento setup:static-content:deploy -f && \
+      bin/magento indexer:reindex && \
+      bin/magento config:set web/secure/base_url https://"env.DOMAIN"/ && \
+      bin/magento config:set web/unsecure/base_url https://"env.DOMAIN"/ && \
+      chown -R app:app /var/www/html/ && \
+      bin/magento cache:flush && \
+      bin/magento cron:install
 
 USER app:app
 VOLUME /var/www
