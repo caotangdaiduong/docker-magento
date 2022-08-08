@@ -93,12 +93,6 @@ COPY conf/php.ini $PHP_INI_DIR
 COPY conf/php-fpm.conf /usr/local/etc/
 COPY conf/www.conf /usr/local/etc/php-fpm.d/
 COPY --chown=app bin bin
-# # Download source code
-# RUN echo "Composer auth for repo.magento.com" && \
-#     composer config --global http-basic.repo.magento.com 9a88e8f9040ba41a8516077e2bbad8e0 9fe89f9ee74c4bf55d6a2da335837b4a && \
-#     chown -R app:app /var/www/html/ && \
-#     echo "Creat project template" && \
-#     composer create-project --repository=https://repo.magento.com/ magento/project-community-edition=2.4.4 . 
 
 USER app:app
 VOLUME /var/www
