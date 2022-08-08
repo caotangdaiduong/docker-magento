@@ -145,7 +145,7 @@ spec:
     spec:
       containers:
       - name: magento-php
-        image: caotangdaiduong/magento-php:latest
+        image: caotangdaiduong/magento-php81:latest
         resources:
           limits:
             memory: "725Mi"
