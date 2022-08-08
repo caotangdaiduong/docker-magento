@@ -140,11 +140,7 @@ RUN echo "Composer auth for repo.magento.com" && \
     echo "Creat project template" && \
     composer create-project --repository=https://repo.magento.com/ magento/project-community-edition=2.4.4 . 
 
-RUN composer config --no-plugins allow-plugins.magento/magento-composer-installer true && \
-    composer config --no-plugins allow-plugins.magento/inventory-composer-installer true && \
-    composer config --no-plugins allow-plugins.laminas/laminas-dependency-plugin true && \
-    cd /var/www/html && \
-    bin/magento setup:install \
+RUN bin/magento setup:install \
       --db-host=localhost \
       --db-name=magento \
       --db-user=magento \
