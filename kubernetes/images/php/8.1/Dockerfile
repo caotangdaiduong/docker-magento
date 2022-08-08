@@ -140,8 +140,7 @@ RUN echo "Composer auth for repo.magento.com" && \
     echo "Creat project template" && \
     composer create-project --repository=https://repo.magento.com/ magento/project-community-edition=2.4.4 . 
 
-RUN echo "Adding Magento modules to Composer allow-plugins directive..." && \
-    composer config --no-plugins allow-plugins.magento/magento-composer-installer true && \
+RUN composer config --no-plugins allow-plugins.magento/magento-composer-installer true && \
     composer config --no-plugins allow-plugins.magento/inventory-composer-installer true && \
     composer config --no-plugins allow-plugins.laminas/laminas-dependency-plugin true && \
     cd /var/www/html && \
