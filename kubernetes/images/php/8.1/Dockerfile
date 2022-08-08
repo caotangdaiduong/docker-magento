@@ -145,7 +145,7 @@ RUN echo "Adding Magento modules to Composer allow-plugins directive..." && \
     composer config --no-plugins allow-plugins.magento/inventory-composer-installer true && \
     composer config --no-plugins allow-plugins.laminas/laminas-dependency-plugin true && \
     bin/magento setup:install \
-  --db-host=db \
+  --db-host=127.0.0.1 \
   --db-name=magento \
   --db-user=magento \
   --db-password=magento \
