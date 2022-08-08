@@ -1,0 +1,46 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: magento-redis
+  labels:
+    app: magento
+spec:
+  ports:
+    - port: 6379
+  selector:
+    app: magento
+    tier: redis
+  clusterIP: None
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: magento-redis
+  labels:
+    app: magento
+spec:
+  selector:
+    matchLabels:
+      app: magento
+      tier: redis
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: magento
+        tier: redis
+    spec:
+      containers:
+      - image: redis
+        name: redis
+        resources:
+          limits:
+            cpu: 500m
+            memory: 1Gi
+          requests:
+            cpu: 250m
+            memory: 500Mi
+        ports:
+        - containerPort: 6379
+          name: redis
