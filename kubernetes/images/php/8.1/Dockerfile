@@ -77,6 +77,7 @@ RUN apt-get update && apt-get install -y \
     procps \
     vim \
     zip \
+    telnet \
   && rm -rf /var/lib/apt/lists/*
 
 RUN pecl channel-update pecl.php.net && pecl install \
