@@ -2,13 +2,54 @@ FROM php:8.1-fpm-bullseye
 MAINTAINER ThePhamDinh [thepd@smartosc.com]
 
 ARG APP_ID=1000
+
+# Database
+ENV MYSQL_HOST=127.0.0.1
+ENV MYSQL_ROOT_PASSWORD=magento
+ENV MYSQL_DATABASE=magento
+ENV MYSQL_USER=magento
+ENV MYSQL_PASSWORD=magento
+ENV MYSQL_INTEGRATION_ROOT_PASSWORD=magento
+ENV MYSQL_INTEGRATION_DATABASE=magento_integration_tests
+ENV MYSQL_INTEGRATION_USER=magento
+ENV MYSQL_INTEGRATION_PASSWORD=magento
+ENV MYSQL_INTEGRATION_HOST=db
+# ElasticSearch
+ENV ES_HOST=127.0.0.1
+ENV ES_PORT=9200
+ENV ES_HEALTHCHECK_TIMEOUT=100
+# Magento
+ENV DOMAIN=magento.test
+ENV MAGENTO_ADMIN_EMAIL=john.smith@gmail.com
+ENV MAGENTO_ADMIN_FIRST_NAME=john
+ENV MAGENTO_ADMIN_LAST_NAME=smith
+ENV MAGENTO_ADMIN_USER=john.smith
+ENV MAGENTO_ADMIN_PASSWORD=password123
+ENV MAGENTO_ADMIN_FRONTNAME=admin
+ENV MAGENTO_LOCALE=en_US
+ENV MAGENTO_CURRENCY=USD
+ENV MAGENTO_TIMEZONE=America/New_York
+ENV BLACKFIRE_CLIENT_ID=
+ENV BLACKFIRE_CLIENT_TOKEN=
+ENV COMPOSER_DISABLE_XDEBUG_WARN=1
+ENV PHP_CS_FIXER_IGNORE_ENV=1
+# RabbitMQ
+ENV RABBITMQ_HOST=127.0.0.1
+ENV RABBITMQ_PORT=5672
+ENV RABBITMQ_MANAGEMENT_PORT=15672
+ENV RABBITMQ_DEFAULT_USER=magento
+ENV RABBITMQ_DEFAULT_PASS=magento
+ENV RABBITMQ_DEFAULT_VHOST=/
+ENV RABBITMQ_HEALTHCHECK_TIMEOUT=10
+
+
 RUN groupadd -g "$APP_ID" app \
   && useradd -g "$APP_ID" -u "$APP_ID" -d /var/www -s /bin/bash app
 
 RUN mkdir -p /etc/nginx/html /var/www/html \
   && chown -R app:app /etc/nginx /var/www /usr/local/etc/php/conf.d
 
-RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
+# RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
 
 RUN apt-get update && apt-get install -y \
     cron \
@@ -91,6 +132,61 @@ COPY conf/msmtprc /etc/msmtprc
 COPY conf/php.ini $PHP_INI_DIR
 COPY conf/php-fpm.conf /usr/local/etc/
 COPY conf/www.conf /usr/local/etc/php-fpm.d/
+
+# Download source code
+RUN echo "Composer auth for repo.magento.com" && \
+    composer config --global http-basic.repo.magento.com 9a88e8f9040ba41a8516077e2bbad8e0 9fe89f9ee74c4bf55d6a2da335837b4a && \
+    chown -R app:app /var/www/html/ && \
+    echo "Creat project template" && \
+    composer create-project --repository=https://repo.magento.com/ magento/project-community-edition=2.4.4 . 
+
+RUN echo "Adding Magento modules to Composer allow-plugins directive..." && \
+    composer config --no-plugins allow-plugins.magento/magento-composer-installer true && \
+    composer config --no-plugins allow-plugins.magento/inventory-composer-installer true && \
+    composer config --no-plugins allow-plugins.laminas/laminas-dependency-plugin true && \
+    bin/magento setup:install \
+      --db-host="$MYSQL_HOST" \
+      --db-name="$MYSQL_DATABASE" \
+      --db-user="$MYSQL_USER" \
+      --db-password="$MYSQL_PASSWORD" \
+      --base-url=https://"$DOMAIN"/ \
+      --base-url-secure=https://"$DOMAIN"/ \
+      --backend-frontname="$MAGENTO_ADMIN_FRONTNAME" \
+      --admin-firstname="$MAGENTO_ADMIN_FIRST_NAME" \
+      --admin-lastname="$MAGENTO_ADMIN_LAST_NAME" \
+      --admin-email="$MAGENTO_ADMIN_EMAIL" \
+      --admin-user="$MAGENTO_ADMIN_USER" \
+      --admin-password="$MAGENTO_ADMIN_PASSWORD" \
+      --language="$MAGENTO_LOCALE" \
+      --currency="$MAGENTO_CURRENCY" \
+      --timezone="$MAGENTO_TIMEZONE" \
+      --amqp-host="$RABBITMQ_HOST" \
+      --amqp-port="$RABBITMQ_PORT" \
+      --amqp-user="$RABBITMQ_DEFAULT_USER" \
+      --amqp-password="$RABBITMQ_DEFAULT_PASS" \
+      --amqp-virtualhost="$RABBITMQ_DEFAULT_VHOST" \
+      --cache-backend=redis \
+      --cache-backend-redis-server=redis \
+      --cache-backend-redis-db=0 \
+      --page-cache=redis \
+      --page-cache-redis-server=redis \
+      --page-cache-redis-db=1 \
+      --session-save=redis \
+      --session-save-redis-host=redis \
+      --session-save-redis-log-level=4 \
+      --session-save-redis-db=2 \
+      --search-engine=elasticsearch7 \
+      --elasticsearch-host=$ES_HOST \
+      --elasticsearch-port=$ES_PORT \
+      --use-rewrites=1 \
+      --no-interaction && \
+      bin/magento setup:static-content:deploy -f && \
+      bin/magento indexer:reindex && \
+      bin/magento config:set web/secure/base_url https://"$DOMAIN"/ && \
+      bin/magento config:set web/unsecure/base_url https://"$DOMAIN"/ && \
+      chown -R app:app /var/www/html/ && \
+      bin/magento cache:flush && \
+      bin/magento cron:install
 
 USER app:app
 VOLUME /var/www
