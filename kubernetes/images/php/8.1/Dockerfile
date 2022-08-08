@@ -182,8 +182,8 @@ RUN composer config --no-plugins allow-plugins.magento/magento-composer-installe
       --no-interaction && \
       bin/magento setup:static-content:deploy -f && \
       bin/magento indexer:reindex && \
-      bin/magento config:set web/secure/base_url https://"env.DOMAIN"/ && \
-      bin/magento config:set web/unsecure/base_url https://"env.DOMAIN"/ && \
+      bin/magento config:set web/secure/base_url https://localhost && \
+      bin/magento config:set web/unsecure/base_url https://localhost && \
       chown -R app:app /var/www/html/ && \
       bin/magento cache:flush && \
       bin/magento cron:install
