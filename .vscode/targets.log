@@ -6,8 +6,9 @@ make.exe all --print-data-base --no-builtin-variables --no-builtin-rules --quest
 # PARTICULAR PURPOSE.
 
 # This program built for i386-pc-mingw32
+ 
 
-# Make data base, printed on Sat Aug 06 14:53:22 2022
+# Make data base, printed on Mon Aug 08 14:40:27 2022
 
 # Variables
 
@@ -34,7 +35,7 @@ SHELL := sh.exe
 # environment
 WINDIR = C:\Windows
 # environment
-VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
+VSCODE_NLS_CONFIG = {"locale":"en-gb","availableLanguages":{},"_languagePackSupport":true}
 # environment
 ONEDRIVE = C:\Users\caota\OneDrive
 # environment
@@ -52,9 +53,11 @@ PROGRAMDATA = C:\ProgramData
 # environment
 VSCODE_CWD = C:\Program Files\Microsoft VS Code
 # environment
-PATH = C:\Program Files\Eclipse Adoptium\jre-8.0.322.6-hotspot\bin;C:\Program Files (x86)\VMware\VMware Workstation\bin\;C:\Program Files\Eclipse Foundation\jre-11.0.12.7-hotspot\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\PuTTY\;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Program Files\Git\cmd;C:\Program Files\WireGuard\;C:\Program Files\dotnet\;C:\TDM-GCC-32\bin;C:\Program Files\Go\bin;C:\xampp\php;C:\ProgramData\ComposerSetup\bin;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\Program Files\Amazon\AWSCLIV2\;C:\Program Files\Kubernetes\Minikube;C:\Users\caota\AppData\Local\Microsoft\WindowsApps;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Users\caota\AppData\Local\GitHubDesktop\bin;C:\instantclient_12_2;C:\;C:\Users\caota\AppData\Roaming\Composer\vendor\bin;C:\Program Files (x86)\GnuWin32\bin;C:\Users\caota\OneDrive\Documents;
+PATH = C:\Program Files (x86)\VMware\VMware Workstation\bin\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\PuTTY\;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\Amazon\AWSCLIV2\;C:\Program Files\Go\bin;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;C:\xampp\php;C:\ProgramData\ComposerSetup\bin;C:\minikube;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\Users\caota\OneDrive\Documents;C:\Users\caota\go\bin;C:\Users\caota\AppData\Roaming\npm;C:\frpc;C:\Users\caota\AppData\Roaming\Composer\vendor\bin;C:\minikube;C:\Program Files (x86)\GnuWin32\bin;
 # environment
 COMMONPROGRAMW6432 = C:\Program Files\Common Files
+# environment
+ZES_ENABLE_SYSMAN = 1
 # environment
 PROCESSOR_ARCHITECTURE = x86
 # environment
@@ -72,9 +75,9 @@ ELECTRON_RUN_AS_NODE = 1
 # automatic
 %F = $(notdir $%)
 # environment
-CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_21164_MWOAAWVFZGYUTETL
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_28732_RJAZWAEDYORXLUGX
 # environment
-COMPUTERNAME = ASROCK
+COMPUTERNAME = DESKTOP
 # environment
 PROGRAMFILES = C:\Program Files (x86)
 # environment
@@ -94,19 +97,17 @@ APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
 # environment
 COMMONPROGRAMFILES = C:\Program Files (x86)\Common Files
 # environment
-LOGONSERVER = \\ASROCK
+LOGONSERVER = \\DESKTOP
 # environment
 ONEDRIVECONSUMER = C:\Users\caota\OneDrive
 # environment
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # environment
-USERDOMAIN = ASROCK
+USERDOMAIN = DESKTOP
 # default
 MAKE = $(MAKE_COMMAND)
 # default
 MAKECMDGOALS := all
-# environment
-JAVA_HOME = C:\Program Files\Eclipse Adoptium\jre-8.0.322.6-hotspot\
 # default
 MAKE_VERSION := 3.81
 # makefile
@@ -128,7 +129,7 @@ PROCESSOR_ARCHITEW6432 = AMD64
 # automatic
 *F = $(notdir $*)
 # environment
-PROCESSOR_IDENTIFIER = Intel64 Family 6 Model 94 Stepping 3, GenuineIntel
+PROCESSOR_IDENTIFIER = Intel64 Family 6 Model 140 Stepping 1, GenuineIntel
 # environment
 OS = Windows_NT
 # environment
@@ -170,7 +171,7 @@ SYSTEMDRIVE = C:
 # environment
 SESSIONNAME = Console
 # environment
-PROCESSOR_REVISION = 5e03
+PROCESSOR_REVISION = 8c01
 # environment
 MAKELEVEL := 0
 # environment
@@ -180,9 +181,9 @@ PROCESSOR_LEVEL = 6
 # environment
 FPS_BROWSER_APP_PROFILE_STRING = Internet Explorer
 # environment
-VSCODE_PID = 21164
+VSCODE_PID = 28732
 # environment
-USERDOMAIN_ROAMINGPROFILE = ASROCK
+USERDOMAIN_ROAMINGPROFILE = DESKTOP
 # variable set hash-table stats:
 # Load=86/1024=8%, Rehash=0, Collisions=9/103=9%
 
@@ -192,39 +193,33 @@ USERDOMAIN_ROAMINGPROFILE = ASROCK
 
 # Directories
 
-# C:\xampp\php (key C:/xampp/php, mtime 1650813669): 64 files, no impossibilities.
-# C:\Program Files\Docker\Docker\resources\bin (key C:/Program Files/Docker/Docker/resources/bin, mtime 1657895072): 13 files, no impossibilities.
-# C:\Program Files\Go\bin (key C:/Program Files/Go/bin, mtime 1650123234): 4 files, no impossibilities.
-# C:\Windows\System32\WindowsPowerShell\v1.0\ (key C:/Windows/System32/WindowsPowerShell/v1.0/, mtime 1622903042): 30 files, no impossibilities.
-# C:\Windows\System32\Wbem (key C:/Windows/System32/Wbem, mtime 1653774360): 170 files, no impossibilities.
-# . (key c:/Users/caota/docker-magento, mtime 1659541125): 14 files, no impossibilities.
-# C:\instantclient_12_2: could not be stat'd.
-# C:\Program Files\dotnet\ (key C:/Program Files/dotnet/, mtime 1642063798): 8 files, no impossibilities.
-# C:\: could not be stat'd.
-# C:\Program Files\WireGuard\ (key C:/Program Files/WireGuard/, mtime 1640442565): 5 files, no impossibilities.
-# C:\Program Files (x86)\VMware\VMware Workstation\bin\ (key C:/Program Files (x86)/VMware/VMware Workstation/bin/, mtime 1642266695): 4 files, no impossibilities.
+# C:\xampp\php (key C:/xampp/php, mtime 1655175904): 64 files, no impossibilities.
+# C:\Users\caota\go\bin (key C:/Users/caota/go/bin, mtime 1655954894): 3 files, no impossibilities.
+# C:\Program Files\Docker\Docker\resources\bin (key C:/Program Files/Docker/Docker/resources/bin, mtime 1658976987): 13 files, no impossibilities.
+# C:\Program Files\Go\bin (key C:/Program Files/Go/bin, mtime 1654616401): 4 files, no impossibilities.
+# C:\Windows\System32\WindowsPowerShell\v1.0\ (key C:/Windows/System32/WindowsPowerShell/v1.0/, mtime 1622913053): 30 files, no impossibilities.
+# C:\Windows\System32\Wbem (key C:/Windows/System32/Wbem, mtime 1654610932): 171 files, no impossibilities.
+# . (key c:/Users/caota/docker-magento, mtime 1659944421): 14 files, no impossibilities.
+# C:\Program Files\nodejs\ (key C:/Program Files/nodejs/, mtime 1654658888): 13 files, no impossibilities.
+# C:\Program Files (x86)\VMware\VMware Workstation\bin\ (key C:/Program Files (x86)/VMware/VMware Workstation/bin/, mtime 1655881004): 4 files, no impossibilities.
 # C:\Windows\System32\OpenSSH\: could not be stat'd.
-# C:\ProgramData\ComposerSetup\bin (key C:/ProgramData/ComposerSetup/bin, mtime 1654184317): 5 files, no impossibilities.
-# C:\Program Files\PuTTY\ (key C:/Program Files/PuTTY/, mtime 1633522742): 12 files, no impossibilities.
-# C:\Program Files\Microsoft VS Code\bin (key C:/Program Files/Microsoft VS Code/bin, mtime 1658927452): 4 files, no impossibilities.
-# C:\Windows (key C:/Windows, mtime 1659612612): 124 files, no impossibilities.
-# C:\TDM-GCC-32\bin (key C:/TDM-GCC-32/bin, mtime 1649686533): 54 files, no impossibilities.
-# C:\Program Files\Intel\WiFi\bin\ (key C:/Program Files/Intel/WiFi/bin/, mtime 1633525430): 37 files, no impossibilities.
-# C:\Program Files\Common Files\Intel\WirelessCommon\ (key C:/Program Files/Common Files/Intel/WirelessCommon/, mtime 1633525408): 7 files, no impossibilities.
+# C:\ProgramData\ComposerSetup\bin (key C:/ProgramData/ComposerSetup/bin, mtime 1655176151):  
+5 files, no impossibilities.
+# C:\Program Files\PuTTY\ (key C:/Program Files/PuTTY/, mtime 1654607469): 12 files, no impossibilities.
+# C:\Program Files\Microsoft VS Code\bin (key C:/Program Files/Microsoft VS Code/bin, mtime 1658895275): 4 files, no impossibilities.
+# C:\Windows (key C:/Windows, mtime 1657708393): 116 files, no impossibilities.
+# C:\Users\caota\AppData\Roaming\npm (key C:/Users/caota/AppData/Roaming/npm, mtime 1654658885): 2 files, no impossibilities.
 # C:\Users\caota\AppData\Roaming\Composer\vendor\bin: could not be stat'd.
-# C:\Program Files\Amazon\AWSCLIV2\ (key C:/Program Files/Amazon/AWSCLIV2/, mtime 1657983050): 39 files, no impossibilities.
+# C:\Program Files\Amazon\AWSCLIV2\ (key C:/Program Files/Amazon/AWSCLIV2/, mtime 1654616172): 38 files, no impossibilities.
 # C:\ProgramData\DockerDesktop\version-bin: could not be stat'd.
-# C:\Program Files\Kubernetes\Minikube (key C:/Program Files/Kubernetes/Minikube, mtime 1658152264): 6 files, no impossibilities.
-# C:\Program Files\Eclipse Adoptium\jre-8.0.322.6-hotspot\bin (key C:/Program Files/Eclipse Adoptium/jre-8.0.322.6-hotspot/bin, mtime 1648173116): 57 files, no impossibilities.
-# C:\Program Files\Git\cmd (key C:/Program Files/Git/cmd, mtime 1634462813): 8 files, no impossibilities.
-# C:\Windows\system32 (key C:/Windows/system32, mtime 1659612875): 3021 files, no impossibilities.
-# C:\Users\caota\AppData\Local\GitHubDesktop\bin (key C:/Users/caota/AppData/Local/GitHubDesktop/bin, mtime 1645870898): 4 files, no impossibilities.
-# C:\Users\caota\AppData\Local\Microsoft\WindowsApps (key C:/Users/caota/AppData/Local/Microsoft/WindowsApps, mtime 1659621032): 24 files, no impossibilities.
-# C:\Program Files\Eclipse Foundation\jre-11.0.12.7-hotspot\bin (key C:/Program Files/Eclipse Foundation/jre-11.0.12.7-hotspot/bin, mtime 1633965531): 101 files, no impossibilities.
-# C:\Users\caota\OneDrive\Documents (key C:/Users/caota/OneDrive/Documents, mtime 1659769292): 38 files, no impossibilities.
-# C:\Program Files (x86)\GnuWin32\bin (key C:/Program Files (x86)/GnuWin32/bin, mtime 1655005813): 5 files, no impossibilities.
+# C:\Program Files\Git\cmd (key C:/Program Files/Git/cmd, mtime 1654656798): 8 files, no impossibilities.
+# C:\Windows\system32 (key C:/Windows/system32, mtime 1659923524): 2899 files, no impossibilities.
+# C:\minikube (key C:/minikube, mtime 1655969068): 3 files, no impossibilities.
+# C:\frpc (key C:/frpc, mtime 1659941993): 12 files, no impossibilities.
+# C:\Users\caota\OneDrive\Documents (key C:/Users/caota/OneDrive/Documents, mtime 1659599819): 38 files, no impossibilities.
+# C:\Program Files (x86)\GnuWin32\bin (key C:/Program Files (x86)/GnuWin32/bin, mtime 1656399728): 5 files, no impossibilities.
 
-# 3858 files, no impossibilities in 31 directories.
+# 3458 files, no impossibilities in 24 directories.
 
 # Implicit Rules
 
@@ -286,7 +281,7 @@ GNUmakefile:
 # strcache size: total = 0 / max = 0 / min = 4096 / avg = 0
 # strcache free: total = 0 / max = 0 / min = 4096 / avg = 0
 
-# Finished Make data base on Sat Aug 06 14:53:22 2022
+# Finished Make data base on Mon Aug 08 14:40:27 2022
 
  
 make.exe: *** No rule to make target `all'.  Stop.

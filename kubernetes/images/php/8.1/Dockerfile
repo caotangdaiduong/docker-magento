@@ -145,26 +145,26 @@ RUN echo "Adding Magento modules to Composer allow-plugins directive..." && \
     composer config --no-plugins allow-plugins.magento/inventory-composer-installer true && \
     composer config --no-plugins allow-plugins.laminas/laminas-dependency-plugin true && \
     bin/magento setup:install \
-      --db-host="$MYSQL_HOST" \
-      --db-name="$MYSQL_DATABASE" \
-      --db-user="$MYSQL_USER" \
-      --db-password="$MYSQL_PASSWORD" \
-      --base-url=https://"$DOMAIN"/ \
-      --base-url-secure=https://"$DOMAIN"/ \
-      --backend-frontname="$MAGENTO_ADMIN_FRONTNAME" \
-      --admin-firstname="$MAGENTO_ADMIN_FIRST_NAME" \
-      --admin-lastname="$MAGENTO_ADMIN_LAST_NAME" \
-      --admin-email="$MAGENTO_ADMIN_EMAIL" \
-      --admin-user="$MAGENTO_ADMIN_USER" \
-      --admin-password="$MAGENTO_ADMIN_PASSWORD" \
-      --language="$MAGENTO_LOCALE" \
-      --currency="$MAGENTO_CURRENCY" \
-      --timezone="$MAGENTO_TIMEZONE" \
-      --amqp-host="$RABBITMQ_HOST" \
-      --amqp-port="$RABBITMQ_PORT" \
-      --amqp-user="$RABBITMQ_DEFAULT_USER" \
-      --amqp-password="$RABBITMQ_DEFAULT_PASS" \
-      --amqp-virtualhost="$RABBITMQ_DEFAULT_VHOST" \
+      --db-host="env.MYSQL_HOST" \
+      --db-name="env.MYSQL_DATABASE" \
+      --db-user="env.MYSQL_USER" \
+      --db-password="env.MYSQL_PASSWORD" \
+      --base-url=https://"env.DOMAIN"/ \
+      --base-url-secure=https://"env.DOMAIN"/ \
+      --backend-frontname="env.MAGENTO_ADMIN_FRONTNAME" \
+      --admin-firstname="env.MAGENTO_ADMIN_FIRST_NAME" \
+      --admin-lastname="env.MAGENTO_ADMIN_LAST_NAME" \
+      --admin-email="env.MAGENTO_ADMIN_EMAIL" \
+      --admin-user="env.MAGENTO_ADMIN_USER" \
+      --admin-password="env.MAGENTO_ADMIN_PASSWORD" \
+      --language="env.MAGENTO_LOCALE" \
+      --currency="env.MAGENTO_CURRENCY" \
+      --timezone="env.MAGENTO_TIMEZONE" \
+      --amqp-host="env.RABBITMQ_HOST" \
+      --amqp-port="env.RABBITMQ_PORT" \
+      --amqp-user="env.RABBITMQ_DEFAULT_USER" \
+      --amqp-password="env.RABBITMQ_DEFAULT_PASS" \
+      --amqp-virtualhost="env.RABBITMQ_DEFAULT_VHOST" \
       --cache-backend=redis \
       --cache-backend-redis-server=redis \
       --cache-backend-redis-db=0 \
@@ -176,14 +176,14 @@ RUN echo "Adding Magento modules to Composer allow-plugins directive..." && \
       --session-save-redis-log-level=4 \
       --session-save-redis-db=2 \
       --search-engine=elasticsearch7 \
-      --elasticsearch-host=$ES_HOST \
-      --elasticsearch-port=$ES_PORT \
+      --elasticsearch-host=env.ES_HOST \
+      --elasticsearch-port=env.ES_PORT \
       --use-rewrites=1 \
       --no-interaction && \
       bin/magento setup:static-content:deploy -f && \
       bin/magento indexer:reindex && \
-      bin/magento config:set web/secure/base_url https://"$DOMAIN"/ && \
-      bin/magento config:set web/unsecure/base_url https://"$DOMAIN"/ && \
+      bin/magento config:set web/secure/base_url https://"env.DOMAIN"/ && \
+      bin/magento config:set web/unsecure/base_url https://"env.DOMAIN"/ && \
       chown -R app:app /var/www/html/ && \
       bin/magento cache:flush && \
       bin/magento cron:install
