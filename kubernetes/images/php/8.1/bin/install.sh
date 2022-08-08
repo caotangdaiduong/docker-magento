@@ -2,10 +2,6 @@
 
 DOMAIN=${1:-magento.test}
 
-composer config --global http-basic.repo.magento.com 9a88e8f9040ba41a8516077e2bbad8e0 9fe89f9ee74c4bf55d6a2da335837b4a
-chown -R app:app /var/www/html/
-composer create-project --repository=https://repo.magento.com/ magento/project-community-edition=2.4.4 .
-
 # shellcheck source=../env/db.env
 source env/db.env
 # shellcheck source=../env/elasticsearch.env
@@ -19,12 +15,18 @@ source env/redis.env
 
 DOMAIN=${1:-magento.test}
 
+echo "Composer auth for repo.magento.com"
+composer config --global http-basic.repo.magento.com 9a88e8f9040ba41a8516077e2bbad8e0 9fe89f9ee74c4bf55d6a2da335837b4a
+chown -R app:app /var/www/html/
+echo "Creat project template"
+composer create-project --repository=https://repo.magento.com/ magento/project-community-edition=2.4.4 . 
+
 composer config --no-plugins allow-plugins.magento/magento-composer-installer true
 composer config --no-plugins allow-plugins.magento/inventory-composer-installer true
 composer config --no-plugins allow-plugins.laminas/laminas-dependency-plugin true
 
 echo "Waiting for connection to Elasticsearch..."
-bin/clinotty timeout $ES_HEALTHCHECK_TIMEOUT bash -c "
+timeout $ES_HEALTHCHECK_TIMEOUT bash -c "
     until curl --silent --output /dev/null http://$ES_HOST:$ES_PORT/_cat/health?h=st; do
         printf '.'
         sleep 2
@@ -33,7 +35,7 @@ bin/clinotty timeout $ES_HEALTHCHECK_TIMEOUT bash -c "
 
 echo ""
 echo "Waiting for connection to RabbitMQ..."
-bin/clinotty timeout $RABBITMQ_HEALTHCHECK_TIMEOUT bash -c "
+timeout $RABBITMQ_HEALTHCHECK_TIMEOUT bash -c "
     until curl --silent --output /dev/null http://$RABBITMQ_DEFAULT_USER:$RABBITMQ_DEFAULT_PASS@$RABBITMQ_HOST:$RABBITMQ_MANAGEMENT_PORT/api/aliveness-test/%2F; do
         printf '.'
         sleep 2

@@ -92,7 +92,8 @@ COPY conf/msmtprc /etc/msmtprc
 COPY conf/php.ini $PHP_INI_DIR
 COPY conf/php-fpm.conf /usr/local/etc/
 COPY conf/www.conf /usr/local/etc/php-fpm.d/
-COPY --chown=app bin bin
+COPY --chown=app bin/install.sh /usr/bin/install.sh
+COPY --chown=app env /usr/bin
 
 USER app:app
 VOLUME /var/www
