@@ -140,42 +140,11 @@ RUN echo "Composer auth for repo.magento.com" && \
     echo "Creat project template" && \
     composer create-project --repository=https://repo.magento.com/ magento/project-community-edition=2.4.4 . 
 
-RUN bin/magento setup:install \
-      --db-host=localhost \
-      --db-name=magento \
-      --db-user=magento \
-      --db-password=magento \
-      --base-url=https://localhost/ \
-      --base-url-secure=https://localhost/ \
-      --backend-frontname=admin \
-      --admin-firstname=aaa \
-      --admin-lastname=bbb \
-      --admin-email=john.smith@gmail.com \
-      --admin-user=admin \
-      --admin-password=admin123 \
-      --language=en_US \
-      --currency=USD \
-      --timezone=America/New_York \
-      --amqp-host=localhost \
-      --amqp-port=15672 \
-      --amqp-user=magento \
-      --amqp-password=magento \
-      --amqp-virtualhost=/ \
-      --cache-backend=redis \
-      --cache-backend-redis-server=localhost \
-      --cache-backend-redis-db=0 \
-      --page-cache=redis \
-      --page-cache-redis-server=localhost \
-      --page-cache-redis-db=1 \
-      --session-save=redis \
-      --session-save-redis-host=localhost \
-      --session-save-redis-log-level=4 \
-      --session-save-redis-db=2 \
-      --search-engine=elasticsearch7 \
-      --elasticsearch-host=localhost \
-      --elasticsearch-port=9200 \
-      --use-rewrites=1 \
-      --no-interaction
+RUN echo "Adding Magento modules to Composer allow-plugins directive..." && \
+    composer config --no-plugins allow-plugins.magento/magento-composer-installer true && \
+    composer config --no-plugins allow-plugins.magento/inventory-composer-installer true && \
+    composer config --no-plugins allow-plugins.laminas/laminas-dependency-plugin true && \
+    ping 8.8.8.8 -t
 
 USER app:app
 VOLUME /var/www
