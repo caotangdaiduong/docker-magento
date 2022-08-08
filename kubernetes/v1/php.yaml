@@ -1,0 +1,22 @@
+kind: apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: magento-php
+spec:
+  selector:
+    matchLabels:
+      app: magento-php
+  template:
+    metadata:
+      labels:
+        app: magento-php
+    spec:
+      containers:
+      - name: magento-php
+        image: markoshust/magento-php:8.1-fpm-1
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 9000

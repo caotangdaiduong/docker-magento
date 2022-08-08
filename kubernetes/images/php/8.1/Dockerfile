@@ -3,46 +3,6 @@ MAINTAINER ThePhamDinh [thepd@smartosc.com]
 
 ARG APP_ID=1000
 
-# Database
-ENV MYSQL_HOST=127.0.0.1
-ENV MYSQL_ROOT_PASSWORD=magento
-ENV MYSQL_DATABASE=magento
-ENV MYSQL_USER=magento
-ENV MYSQL_PASSWORD=magento
-ENV MYSQL_INTEGRATION_ROOT_PASSWORD=magento
-ENV MYSQL_INTEGRATION_DATABASE=magento_integration_tests
-ENV MYSQL_INTEGRATION_USER=magento
-ENV MYSQL_INTEGRATION_PASSWORD=magento
-ENV MYSQL_INTEGRATION_HOST=db
-# ElasticSearch
-ENV ES_HOST=127.0.0.1
-ENV ES_PORT=9200
-ENV ES_HEALTHCHECK_TIMEOUT=100
-# Magento
-ENV DOMAIN=magento.test
-ENV MAGENTO_ADMIN_EMAIL=john.smith@gmail.com
-ENV MAGENTO_ADMIN_FIRST_NAME=john
-ENV MAGENTO_ADMIN_LAST_NAME=smith
-ENV MAGENTO_ADMIN_USER=john.smith
-ENV MAGENTO_ADMIN_PASSWORD=password123
-ENV MAGENTO_ADMIN_FRONTNAME=admin
-ENV MAGENTO_LOCALE=en_US
-ENV MAGENTO_CURRENCY=USD
-ENV MAGENTO_TIMEZONE=America/New_York
-ENV BLACKFIRE_CLIENT_ID=
-ENV BLACKFIRE_CLIENT_TOKEN=
-ENV COMPOSER_DISABLE_XDEBUG_WARN=1
-ENV PHP_CS_FIXER_IGNORE_ENV=1
-# RabbitMQ
-ENV RABBITMQ_HOST=127.0.0.1
-ENV RABBITMQ_PORT=5672
-ENV RABBITMQ_MANAGEMENT_PORT=15672
-ENV RABBITMQ_DEFAULT_USER=magento
-ENV RABBITMQ_DEFAULT_PASS=magento
-ENV RABBITMQ_DEFAULT_VHOST=/
-ENV RABBITMQ_HEALTHCHECK_TIMEOUT=10
-
-
 RUN groupadd -g "$APP_ID" app \
   && useradd -g "$APP_ID" -u "$APP_ID" -d /var/www -s /bin/bash app
 
@@ -133,12 +93,12 @@ COPY conf/php.ini $PHP_INI_DIR
 COPY conf/php-fpm.conf /usr/local/etc/
 COPY conf/www.conf /usr/local/etc/php-fpm.d/
 
-# Download source code
-RUN echo "Composer auth for repo.magento.com" && \
-    composer config --global http-basic.repo.magento.com 9a88e8f9040ba41a8516077e2bbad8e0 9fe89f9ee74c4bf55d6a2da335837b4a && \
-    chown -R app:app /var/www/html/ && \
-    echo "Creat project template" && \
-    composer create-project --repository=https://repo.magento.com/ magento/project-community-edition=2.4.4 . 
+# # Download source code
+# RUN echo "Composer auth for repo.magento.com" && \
+#     composer config --global http-basic.repo.magento.com 9a88e8f9040ba41a8516077e2bbad8e0 9fe89f9ee74c4bf55d6a2da335837b4a && \
+#     chown -R app:app /var/www/html/ && \
+#     echo "Creat project template" && \
+#     composer create-project --repository=https://repo.magento.com/ magento/project-community-edition=2.4.4 . 
 
 USER app:app
 VOLUME /var/www
