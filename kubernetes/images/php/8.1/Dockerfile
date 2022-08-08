@@ -77,10 +77,7 @@ RUN apt-get update && apt-get install -y \
     procps \
     vim \
     zip \
-    telnet \
   && rm -rf /var/lib/apt/lists/*
-
-RUN telnet 127.0.0.1 3306
 
 RUN pecl channel-update pecl.php.net && pecl install \
     imagick \
@@ -142,34 +139,6 @@ RUN echo "Composer auth for repo.magento.com" && \
     chown -R app:app /var/www/html/ && \
     echo "Creat project template" && \
     composer create-project --repository=https://repo.magento.com/ magento/project-community-edition=2.4.4 . 
-
-RUN echo "Adding Magento modules to Composer allow-plugins directive..." && \
-    composer config --no-plugins allow-plugins.magento/magento-composer-installer true && \
-    composer config --no-plugins allow-plugins.magento/inventory-composer-installer true && \
-    composer config --no-plugins allow-plugins.laminas/laminas-dependency-plugin true && \
-    bin/magento setup:install \
-  --db-host=127.0.0.1 \
-  --db-name=magento \
-  --db-user=magento \
-  --db-password=magento \
-  --base-url=https://localhost/ \
-  --base-url-secure=https://localhost/ \
-  --backend-frontname=admin \
-  --admin-firstname=aaa \
-  --admin-lastname=bbb \
-  --admin-email=john.smith@gmail.com \
-  --admin-user=admin \
-  --admin-password=admin123 \
-  --language=en_US \
-  --currency=USD \
-  --timezone=America/New_York && \
-      bin/magento setup:static-content:deploy -f && \
-      bin/magento indexer:reindex && \
-      bin/magento config:set web/secure/base_url https://"env.DOMAIN"/ && \
-      bin/magento config:set web/unsecure/base_url https://"env.DOMAIN"/ && \
-      chown -R app:app /var/www/html/ && \
-      bin/magento cache:flush && \
-      bin/magento cron:install
 
 USER app:app
 VOLUME /var/www
