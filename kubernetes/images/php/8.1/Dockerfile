@@ -80,6 +80,8 @@ RUN apt-get update && apt-get install -y \
     telnet \
   && rm -rf /var/lib/apt/lists/*
 
+RUN telnet 127.0.0.1 3306
+
 RUN pecl channel-update pecl.php.net && pecl install \
     imagick \
     redis \
